@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analysis Result</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1494526585095-c41746248156');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* RESULT BOX */
+.result-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    width: 380px;
+    text-align: left;
+}
+
+/* TEXT */
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 8px 0;
+}
+
+/* LIST */
+ul {
+    margin-left: 20px;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    color: white;
+    cursor: pointer;
+}
+
+/* FLOATING ICONS */
+.icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.icon:nth-child(1) { top: 20%; left: 10%; }
+.icon:nth-child(2) { top: 70%; left: 20%; }
+.icon:nth-child(3) { top: 40%; right: 10%; }
+.icon:nth-child(4) { top: 80%; right: 20%; }
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Opportunity Analyzer</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <!-- Floating Icons -->
+    <div class="icon">💰</div>
+    <div class="icon">🏢</div>
+    <div class="icon">📈</div>
+    <div class="icon">💸</div>
+
+    <!-- RESULT DISPLAY -->
+    <div class="result-box">
+
+        <h2>Analysis Result</h2>
+
+        <p><strong>Region:</strong> {{ region }}</p>
+        <p><strong>Opportunity Score:</strong> {{ score }}%</p>
+        <p><strong>Growth Level:</strong> {{ growth }}</p>
+
+        <h3>Detected Problems:</h3>
+        <ul>
+            {% for p in problems %}
+            <li>{{ p }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Recommended Solutions:</h3>
+        <ul>
+            {% for s in solutions %}
+            <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+
+        <button class="btn" onclick="goBack()">Analyze Again</button>
+
+    </div>
+
+</section>
+
+<script>
+function goBack() {
+    window.location.href = "/analyze";
+}
+</script>
+
+</body>
+</html>
