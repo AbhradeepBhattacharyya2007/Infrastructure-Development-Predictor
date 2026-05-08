@@ -16,13 +16,13 @@ def get_input_data(request):
 
 
 def calculate_score(roads, internet, education, business):
-    return roads + internet + education + business
+    return (roads + internet + education + business) // 4
 
 
 def get_growth_level(score):
-    if score >= 100:
+    if score >= 70:
         return "High"
-    elif score >= 60:
+    elif score >= 40:
         return "Medium"
     else:
         return "Low"
@@ -109,7 +109,8 @@ def result():
     if business < 20:
         reasons.append("Weak business ecosystem limits jobs")
 
-    future_score = min(score + 15, 100)
+    future_score = min(score + (100 - score) * 0.3, 100)
+    future_score = int(future_score)
 
     return render_template(
         'result.html',
