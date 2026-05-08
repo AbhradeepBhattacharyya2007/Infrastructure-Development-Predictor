@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Opportunity Analyzer</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links button {
+    margin-left: 10px;
+}
+
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1494526585095-c41746248156');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+/* HERO CONTENT */
+.hero-content h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.primary {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    color: white;
+}
+
+.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+}
+
+/* FEATURES */
+.section {
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.features {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.card {
+    width: 240px;
+    padding: 25px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* HOW IT WORKS */
+.flow {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.step {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    width: 180px;
+}
+
+/* FOOTER */
+.footer {
+    background: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* FLOATING ICONS */
+.icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.icon:nth-child(1) { top: 20%; left: 10%; }
+.icon:nth-child(2) { top: 70%; left: 20%; }
+.icon:nth-child(3) { top: 40%; right: 10%; }
+.icon:nth-child(4) { top: 80%; right: 20%; }
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Opportunity Analyzer</div>
+
+    <div class="nav-links">
+        <button class="btn secondary" onclick="goAnalyze()">Analyze</button>
+        <button class="btn primary" onclick="goSettings()">Settings</button>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <!-- Floating icons -->
+    <div class="icon">💰</div>
+    <div class="icon">🏢</div>
+    <div class="icon">📈</div>
+    <div class="icon">💸</div>
+
+    <div class="hero-content">
+        <h1 id="title"></h1>
+        <p>Turn infrastructure into real economic opportunity</p>
+
+        <button class="btn primary" onclick="goAnalyze()">Start Analysis</button>
+        <button class="btn secondary" onclick="goSettings()">Settings</button>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features">
+    <h2>Features</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Analyze Regions</h3>
+            <p>Input infrastructure data easily</p>
+        </div>
+
+        <div class="card">
+            <h3>Predict Growth</h3>
+            <p>Get opportunity score instantly</p>
+        </div>
+
+        <div class="card">
+            <h3>Smart Suggestions</h3>
+            <p>Receive actionable recommendations</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+    <h2>How It Works</h2>
+
+    <div class="flow">
+        <div class="step">
+            <h3>1</h3>
+            <p>Enter Region Data</p>
+        </div>
+
+        <div class="step">
+            <h3>2</h3>
+            <p>System Analyzes</p>
+        </div>
+
+        <div class="step">
+            <h3>3</h3>
+            <p>Get Results</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    Built for Hackathon 🚀
+</div>
+
+<script>
+// Typing animation
+let text = "Infrastructure Opportunity Analyzer";
+let i = 0;
+
+function typing() {
+    if (i < text.length) {
+        document.getElementById("title").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 40);
+    }
+}
+typing();
+
+// Navigation
+function goAnalyze() {
+    window.location.href = "analyze.html";
+}
+
+function goSettings() {
+    window.location.href = "settings.html";
+}
+</script>
+
+</body>
+</html>
