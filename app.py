@@ -25,7 +25,7 @@ def get_growth_level(score):
     elif score >= 60:
         return "Medium"
     else:
-        return "Low-Medium"
+        return "Low"
 
 
 def detect_problems(roads, internet, education, business):
