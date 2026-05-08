@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Analysis Result</title>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 * {
     margin: 0;
@@ -16,18 +18,10 @@
 .navbar {
     width: 100%;
     padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: rgba(0,0,0,0.6);
     position: fixed;
     top: 0;
-}
-
-.logo {
     color: white;
-    font-size: 20px;
-    font-weight: bold;
 }
 
 /* HERO */
@@ -37,119 +31,148 @@
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
         url('https://images.unsplash.com/photo-1494526585095-c41746248156');
     background-size: cover;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
 }
 
-/* RESULT BOX */
+/* BOX */
 .result-box {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 12px;
-    width: 380px;
-    text-align: left;
+    width: 400px;
 }
 
-/* TEXT */
-h2 {
-    text-align: center;
-    margin-bottom: 15px;
+/* BAR */
+.bar {
+    background: #333;
+    border-radius: 5px;
+    margin: 5px 0 10px 0;
+}
+.fill {
+    height: 10px;
+    border-radius: 5px;
 }
 
-p {
-    margin: 8px 0;
-}
-
-/* LIST */
-ul {
-    margin-left: 20px;
-}
+/* COLORS */
+.green { background: #4caf50; }
+.orange { background: #ff9800; }
+.red { background: #f44336; }
 
 /* BUTTON */
 .btn {
     margin-top: 15px;
     padding: 10px;
     width: 100%;
-    border: none;
     border-radius: 25px;
+    border: none;
     background: linear-gradient(45deg, #ff512f, #dd2476);
     color: white;
     cursor: pointer;
-}
-
-/* FLOATING ICONS */
-.icon {
-    position: absolute;
-    font-size: 30px;
-    animation: float 6s infinite ease-in-out;
-}
-
-.icon:nth-child(1) { top: 20%; left: 10%; }
-.icon:nth-child(2) { top: 70%; left: 20%; }
-.icon:nth-child(3) { top: 40%; right: 10%; }
-.icon:nth-child(4) { top: 80%; right: 20%; }
-
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="logo">Opportunity Analyzer</div>
-</div>
+<div class="navbar">Opportunity Analyzer</div>
 
-<!-- HERO -->
 <section class="hero">
 
-    <!-- Floating Icons -->
-    <div class="icon">💰</div>
-    <div class="icon">🏢</div>
-    <div class="icon">📈</div>
-    <div class="icon">💸</div>
+<div class="result-box">
 
-    <!-- RESULT DISPLAY -->
-    <div class="result-box">
+<h2>Analysis Result</h2>
 
-        <h2>Analysis Result</h2>
+<p><strong>Region:</strong> {{ region }}</p>
+<p><strong>Score:</strong> {{ score }}%</p>
+<p><strong>Growth:</strong> {{ growth }}</p>
 
-        <p><strong>Region:</strong> {{ region }}</p>
-        <p><strong>Opportunity Score:</strong> {{ score }}%</p>
-        <p><strong>Growth Level:</strong> {{ growth }}</p>
+<hr>
 
-        <h3>Detected Problems:</h3>
-        <ul>
-            {% for p in problems %}
-            <li>{{ p }}</li>
-            {% endfor %}
-        </ul>
+<!-- ✅ SCORE BREAKDOWN -->
+<h3>Breakdown</h3>
 
-        <h3>Recommended Solutions:</h3>
-        <ul>
-            {% for s in solutions %}
-            <li>{{ s }}</li>
-            {% endfor %}
-        </ul>
+<p>Roads: {{ roads }}%</p>
+<div class="bar"><div class="fill green" style="width: {{ roads }}%"></div></div>
 
-        <button class="btn" onclick="goBack()">Analyze Again</button>
+<p>Internet: {{ internet }}%</p>
+<div class="bar"><div class="fill orange" style="width: {{ internet }}%"></div></div>
 
-    </div>
+<p>Education: {{ education }}%</p>
+<div class="bar"><div class="fill orange" style="width: {{ education }}%"></div></div>
+
+<p>Business: {{ business }}%</p>
+<div class="bar"><div class="fill red" style="width: {{ business }}%"></div></div>
+
+<hr>
+
+<!-- ✅ WHY THIS RESULT -->
+<h3>Why this result?</h3>
+<ul>
+{% for r in reasons %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<!-- ✅ PROBLEMS -->
+<h3>Detected Problems</h3>
+<ul>
+{% for p in problems %}
+<li>{{ p }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<!-- ✅ SOLUTIONS -->
+<h3>Solutions</h3>
+<ul>
+{% for s in solutions %}
+<li>{{ s }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<!-- ✅ FUTURE SCORE -->
+<h3>Future Prediction 🚀</h3>
+<p>Projected Score: <strong>{{ future_score }}%</strong></p>
+
+<canvas id="chart"></canvas>
+
+<button class="btn" onclick="goBack()">Analyze Again</button>
+
+</div>
 
 </section>
 
 <script>
+// BACK BUTTON
 function goBack() {
     window.location.href = "/analyze";
 }
+
+// CHART
+new Chart(document.getElementById('chart'), {
+    type: 'bar',
+    data: {
+        labels: ['Current', 'Future'],
+        datasets: [{
+            data: [{{ score }}, {{ future_score }}],
+            backgroundColor: ['red', 'green']
+        }]
+    },
+    options: {
+        plugins: {
+            legend: { display: false }
+        }
+    }
+});
 </script>
 
 </body>
