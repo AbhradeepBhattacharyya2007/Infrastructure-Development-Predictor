@@ -1,25 +1,4 @@
-body {
-    background-color: hsl(var(--background));
-    font-family: var(--app-font-sans);
-    color: hsl(var(--foreground));
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-* {
-    border-color: hsl(var(--border));
-}
-*, :after, :before, ::backdrop {
-    box-sizing: border-box;
-    border: 0 solid;
-    margin: 0;
-    padding: 0;
-}
-user agent stylesheet
-body {
-    display: block;
-    margin: 8px;
-}
-:root {
+root {
     --button-outline: #0000001a;
     --badge-outline: #0000000d;
     --opaque-button-border-intensity: -8;
@@ -72,6 +51,7 @@ body {
     --shadow-xl: 0px 2px 0px 0px #00000005, 0px 8px 10px -1px #0000000d;
 Show all properties (10 more)
 }
+
 html, :host {
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
@@ -80,6 +60,15 @@ html, :host {
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
+}
+* {
+    border-color: hsl(var(--border));
+}
+*, :after, :before, ::backdrop {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
 }
 :root, :host {
     --color-red-50: oklch(97.1% .013 17.38);
@@ -134,11 +123,16 @@ html, :host {
     --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
 Show all properties (7 more)
 }
-*, :after, :before, ::backdrop {
-    box-sizing: border-box;
-    border: 0 solid;
-    margin: 0;
-    padding: 0;
+html[Attributes Style] {
+    -webkit-locale: "en";
+}
+user agent stylesheet
+:root {
+    view-transition-name: root;
+}
+user agent stylesheet
+html {
+    display: block;
 }
 *, :after, :before, ::backdrop {
     box-sizing: border-box;
@@ -152,7 +146,12 @@ Show all properties (7 more)
     margin: 0;
     padding: 0;
 }
-<style>
+*, :after, :before, ::backdrop {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+}
 @font-face {
     font-family: 'Inter';
     font-style: normal;
