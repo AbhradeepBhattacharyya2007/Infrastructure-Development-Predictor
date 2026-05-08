@@ -104,13 +104,19 @@ def result():
     data = format_output(region, score, growth, problems, solutions)
 
     return render_template(
-        'result.html',
-        region=data["region"],
-        score=data["score"],
-        growth=data["growth"],
-        problems=data["problems"],
-        solutions=data["solutions"]
-    )
+    'result.html',
+    region=region,
+    score=score,
+    growth=growth,
+    problems=problems,
+    solutions=solutions,
+    roads=roads,
+    internet=internet,
+    education=education,
+    business=business,
+    reasons=reasons,
+    future_score=future_score
+)
 
 
 # -------------------------------
