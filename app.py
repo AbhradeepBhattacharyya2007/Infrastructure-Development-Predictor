@@ -90,33 +90,41 @@ def analyze():
 
 @app.route('/result', methods=['POST'])
 def result():
-
     region, roads, internet, education, business = get_input_data(request)
 
     score = calculate_score(roads, internet, education, business)
-
     growth = get_growth_level(score)
-
     problems = detect_problems(roads, internet, education, business)
-
     solutions = generate_solutions(problems)
 
-    data = format_output(region, score, growth, problems, solutions)
+    # ✅ ADD HERE
+    reasons = []
+
+    if internet < 20:
+        reasons.append("Low internet reduces business connectivity")
+    if education < 20:
+        reasons.append("Low education reduces skilled workforce")
+    if roads < 20:
+        reasons.append("Poor roads slow transportation")
+    if business < 20:
+        reasons.append("Weak business ecosystem limits jobs")
+
+    future_score = min(score + 15, 100)
 
     return render_template(
-    'result.html',
-    region=region,
-    score=score,
-    growth=growth,
-    problems=problems,
-    solutions=solutions,
-    roads=roads,
-    internet=internet,
-    education=education,
-    business=business,
-    reasons=reasons,
-    future_score=future_score
-)
+        'result.html',
+        region=region,
+        score=score,
+        growth=growth,
+        problems=problems,
+        solutions=solutions,
+        roads=roads,
+        internet=internet,
+        education=education,
+        business=business,
+        reasons=reasons,
+        future_score=future_score
+    )
 
 
 # -------------------------------
