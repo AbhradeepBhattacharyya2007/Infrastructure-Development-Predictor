@@ -1,1 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analyze Region</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links button {
+    margin-left: 10px;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1494526585095-c41746248156');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* FORM CONTAINER */
+.form-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+}
+
+/* INPUTS */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+/* BUTTON */
+.btn {
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    color: white;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* FLOATING ICONS */
+.icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.icon:nth-child(1) { top: 20%; left: 10%; }
+.icon:nth-child(2) { top: 70%; left: 20%; }
+.icon:nth-child(3) { top: 40%; right: 10%; }
+.icon:nth-child(4) { top: 80%; right: 20%; }
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Opportunity Analyzer</div>
+    <div class="nav-links">
+        <button class="btn" onclick="goHome()">Home</button>
+        <button class="btn" onclick="goSettings()">Settings</button>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <!-- Floating Icons -->
+    <div class="icon">💰</div>
+    <div class="icon">🏢</div>
+    <div class="icon">📈</div>
+    <div class="icon">💸</div>
+
+    <!-- FORM -->
+    <div class="form-box">
+        <h2>Analyze Region</h2>
+
+        <!-- BACKEND CONNECTED FORM -->
+        <form action="/result" method="POST">
+
+            <input type="text" name="region" placeholder="Enter Region Name" required>
+
+            <select name="roads">
+                <option value="10">Roads: Low</option>
+                <option value="20">Roads: Medium</option>
+                <option value="30">Roads: High</option>
+            </select>
+
+            <select name="internet">
+                <option value="10">Internet: Low</option>
+                <option value="20">Internet: Medium</option>
+                <option value="30">Internet: High</option>
+            </select>
+
+            <select name="education">
+                <option value="10">Education: Low</option>
+                <option value="20">Education: Medium</option>
+                <option value="30">Education: High</option>
+            </select>
+
+            <select name="business">
+                <option value="10">Business: Low</option>
+                <option value="20">Business: Medium</option>
+                <option value="30">Business: High</option>
+            </select>
+
+            <button class="btn" type="submit">Analyze</button>
+        </form>
+    </div>
+
+</section>
+
+<script>
+// Navigation
+function goHome() {
+    window.location.href = "index.html";
+}
+
+function goSettings() {
+    window.location.href = "settings.html";
+}
+</script>
+
+</body>
+</html>
