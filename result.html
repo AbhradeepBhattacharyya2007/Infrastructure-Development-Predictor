@@ -151,6 +151,32 @@ function goBack() {
     window.location.href = "/analyze";
 }
 </script>
+<script>
+window.onload = function() {
+    let theme = localStorage.getItem("theme");
+    let animation = localStorage.getItem("animation");
+    let layout = localStorage.getItem("layout");
 
+    // THEME
+    if (theme === "dark") {
+        document.body.style.background = "#111";
+        document.body.style.color = "white";
+    }
+
+    // ANIMATION
+    if (animation === "off") {
+        document.querySelectorAll('.icon').forEach(el => {
+            el.style.animation = "none";
+        });
+    }
+
+    // LAYOUT
+    if (layout === "compact") {
+        document.querySelectorAll('.form-box, .result-box, .settings-box').forEach(el => {
+            el.style.width = "300px";
+        });
+    }
+}
+</script>
 </body>
 </html>
