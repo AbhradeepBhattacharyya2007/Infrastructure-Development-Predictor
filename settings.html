@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Settings</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1494526585095-c41746248156');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* SETTINGS BOX */
+.settings-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: left;
+}
+
+/* HEADINGS */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
+/* BUTTONS */
+.btn {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    color: white;
+    cursor: pointer;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: 2px solid white;
+}
+
+/* FLOATING ICONS */
+.icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.icon:nth-child(1) { top: 20%; left: 10%; }
+.icon:nth-child(2) { top: 70%; left: 20%; }
+.icon:nth-child(3) { top: 40%; right: 10%; }
+.icon:nth-child(4) { top: 80%; right: 20%; }
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Opportunity Analyzer</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <!-- Floating Icons -->
+    <div class="icon">⚙️</div>
+    <div class="icon">🎨</div>
+    <div class="icon">💡</div>
+    <div class="icon">🛠️</div>
+
+    <!-- SETTINGS -->
+    <div class="settings-box">
+
+        <h2>Settings</h2>
+
+        <!-- THEME -->
+        <h3>Theme</h3>
+        <button class="btn" onclick="setTheme('light')">Light Mode</button>
+        <button class="btn" onclick="setTheme('dark')">Dark Mode</button>
+
+        <!-- ANIMATION -->
+        <h3>Animations</h3>
+        <button class="btn toggle-btn" onclick="toggleAnimation()">Toggle Animations</button>
+
+        <!-- LAYOUT -->
+        <h3>Layout Style</h3>
+        <button class="btn" onclick="setLayout('default')">Default</button>
+        <button class="btn" onclick="setLayout('compact')">Compact</button>
+
+        <!-- NAVIGATION -->
+        <button class="btn" onclick="goHome()">Back to Home</button>
+
+    </div>
+
+</section>
+
+<script>
+// THEME
+function setTheme(mode) {
+    localStorage.setItem("theme", mode);
+    alert("Theme saved!");
+}
+
+// ANIMATION TOGGLE
+function toggleAnimation() {
+    let current = localStorage.getItem("animation");
+    if (current === "off") {
+        localStorage.setItem("animation", "on");
+        alert("Animations Enabled");
+    } else {
+        localStorage.setItem("animation", "off");
+        alert("Animations Disabled");
+    }
+}
+
+// LAYOUT SWITCH
+function setLayout(type) {
+    localStorage.setItem("layout", type);
+    alert("Layout saved!");
+}
+
+// NAVIGATION
+function goHome() {
+    window.location.href = "/";
+}
+</script>
+
+</body>
+</html>
